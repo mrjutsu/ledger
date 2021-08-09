@@ -1,0 +1,21 @@
+{
+    "name": "mrjutsu/ledger",
+    "description": "A Laravel package that allows you to log everything",
+    "type": "library",
+    "require": {
+        "laravel/framework": "^8",
+        "php": "^7"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mrjutsu\\Ledger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "David Rosillo",
+            "email": "drr538@gmail.com"
+        }
+    ]
+}
