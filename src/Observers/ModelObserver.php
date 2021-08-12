@@ -8,6 +8,12 @@ use MrJutsu\Ledger\Models\LedgerLog;
 
 class ModelObserver
 {
+
+    public const CREATED_ACTION = 'Created';
+    public const UPDATED_ACTION = 'Updated';
+    public const DELETED_ACTION = 'Deleted';
+    public const FORCE_DELETED_ACTION = 'Force Deleted';
+
     /**
      * Handle the Model "created" event.
      *
@@ -16,7 +22,7 @@ class ModelObserver
      */
     public function created(Model $model)
     {
-        //
+        $this->logAction($model, self::CREATED_ACTION);
     }
 
     /**
@@ -27,7 +33,7 @@ class ModelObserver
      */
     public function updated(Model $model)
     {
-        //
+        $this->logAction($model, self::UPDATED_ACTION);
     }
 
     /**
@@ -38,7 +44,7 @@ class ModelObserver
      */
     public function deleted(Model $model)
     {
-        //
+        $this->logAction($model, self::DELETED_ACTION);
     }
 
     /**
@@ -49,6 +55,14 @@ class ModelObserver
      */
     public function forceDeleted(Model $model)
     {
-        //
+        $this->logAction($model, self::FORCE_DELETED_ACTION);
+    }
+
+    private function logAction(Model $model, string $action)
+    {
+        $model->loggable()->create([
+            'action' => $action,
+            'user_id' => auth()->id()
+        ]);
     }
 }
