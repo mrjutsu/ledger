@@ -17,4 +17,10 @@ class LedgerLog extends Model
         'loggable_id',
         'loggable_type',
     ];
+
+
+    public function loggable()
+    {
+        return $this->morphTo();
+    }
 }
