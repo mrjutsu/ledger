@@ -4,9 +4,7 @@ namespace MrJutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
-use MrJutsu\Ledger\Models\LedgerLog;
-
-class ModelObserver
+class ForceDeletedObserver extends ModelObserver
 {
 
     public const FORCE_DELETED_ACTION = 'Force Deleted';
@@ -22,11 +20,4 @@ class ModelObserver
         $this->logAction($model, self::FORCE_DELETED_ACTION);
     }
 
-    protected function logAction(Model $model, string $action)
-    {
-        $model->loggable()->create([
-            'action' => $action,
-            'user_id' => auth()->id()
-        ]);
-    }
 }
