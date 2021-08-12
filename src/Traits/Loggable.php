@@ -34,14 +34,17 @@ trait Loggable {
         );
     }
 
-    /*
+    /**
     * Registers a polymorphic relationship between the model and LedgerLog
-    **/
+    */
     public function ledgerLogs()
     {
         return $this->morphMany(LedgerLog::class, 'loggable');
     }
 
+    /**
+    * Registers a relationship with the user responsible for the action performed
+    */
     public function user()
     {
         return $this->belongsTo(App\Models\User::class);
