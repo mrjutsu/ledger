@@ -8,7 +8,7 @@ trait Loggable {
 
     protected function bootLoggable()
     {
-        // TODO: Boot the trait
+        static::observe(ModelObserver::class);
     }
 
     /*
