@@ -1,10 +1,8 @@
 <?php
 
-namespace MrJutsu\Ledger\Observers;
+namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
-
-use MrJutsu\Ledger\Models\LedgerLog;
 
 class ModelObserver
 {

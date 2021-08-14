@@ -4,10 +4,10 @@ namespace Mrjutsu\Ledger\Traits;
 
 use Mrjutsu\Ledger\Models\LedgerLog;
 
-use MrJutsu\Ledger\Observers\CreatedObserver;
-use MrJutsu\Ledger\Observers\UpdatedObserver;
-use MrJutsu\Ledger\Observers\DeletedObserver;
-use MrJutsu\Ledger\Observers\ForceDeletedObserver;
+use Mrjutsu\Ledger\Observers\CreatedObserver;
+use Mrjutsu\Ledger\Observers\UpdatedObserver;
+use Mrjutsu\Ledger\Observers\DeletedObserver;
+use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
 

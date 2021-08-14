@@ -1,13 +1,13 @@
 <?php
 
-namespace MrJutsu\Ledger\Observers;
+namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
 class UpdatedObserver extends ModelObserver
 {
 
-    public const UPDATED_ACTION = 'Updated';
+    private const UPDATED_ACTION = 'Updated';
 
     /**
      * Handle the Model "updated" event.

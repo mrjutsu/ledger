@@ -1,13 +1,13 @@
 <?php
 
-namespace MrJutsu\Ledger\Observers;
+namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
 class DeletedObserver extends ModelObserver
 {
 
-    public const DELETED_ACTION = 'Deleted';
+    private const DELETED_ACTION = 'Deleted';
 
     /**
      * Handle the Model "deleted" event.

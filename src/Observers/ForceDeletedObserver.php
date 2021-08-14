@@ -1,13 +1,13 @@
 <?php
 
-namespace MrJutsu\Ledger\Observers;
+namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
 class ForceDeletedObserver extends ModelObserver
 {
 
-    public const FORCE_DELETED_ACTION = 'Force Deleted';
+    private const FORCE_DELETED_ACTION = 'Force Deleted';
 
     /**
      * Handle the Model "forceDeleted" event.

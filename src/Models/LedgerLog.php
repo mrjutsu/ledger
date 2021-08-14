@@ -1,6 +1,6 @@
 <?php
 
-namespace MrJutsu\Ledger\Models;
+namespace Mrjutsu\Ledger\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

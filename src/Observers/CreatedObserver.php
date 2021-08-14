@@ -1,10 +1,10 @@
 <?php
 
-namespace MrJutsu\Ledger\Observers;
+namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModelObserver extends ModelObserver
+class CreatedObserver extends ModelObserver
 {
 
     private const CREATED_ACTION = 'Created';
