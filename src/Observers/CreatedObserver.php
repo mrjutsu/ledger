@@ -3,6 +3,9 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\Pipeline;
+
+use function Composer\Autoload\includeFile;
 
 class CreatedObserver extends ModelObserver
 {
@@ -17,7 +20,15 @@ class CreatedObserver extends ModelObserver
      */
     public function created(Model $model)
     {
-        $this->logAction($model, self::CREATED_ACTION);
+        $user = config('ledger.user');
+
+        if ($model instanceof $user) {
+            if (config('ledger.log_user_creation')) {
+                $this->logAction($model, config('ledger.new_user_action'));
+            }
+        } else {
+            $this->logAction($model, self::CREATED_ACTION);
+        }
     }
 
 }
