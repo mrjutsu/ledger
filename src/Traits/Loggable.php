@@ -47,7 +47,7 @@ trait Loggable {
     */
     public function user()
     {
-        return $this->belongsTo(App\Models\User::class);
+        return $this->belongsTo(config('ledger.user'), config('ledger.user_primary_key'));
     }
 
 }
