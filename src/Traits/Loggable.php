@@ -25,12 +25,12 @@ trait Loggable {
         'forceDeleted' => ForceDeletedObserver::class,
     ];
 
-    protected function bootLoggable()
+    public static function bootLoggable()
     {
         static::observe(
             array_map(function($event) {
-                return $this->eventsMap[$event];
-            }, $this->eventsLogged)
+                return self::$eventsMap[$event];
+            }, self::$eventsLogged)
         );
     }
 
