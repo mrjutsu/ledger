@@ -11,14 +11,14 @@ use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
 
-    public $eventsLogged = [
+    public static $eventsLogged = [
         'created',
         'updated',
         'deleted',
         'forceDeleted'
     ];
 
-    private $eventsMap = [
+    private static $eventsMap = [
         'created' => CreatedObserver::class,
         'updated' => UpdatedObserver::class,
         'deleted' => DeletedObserver::class,
