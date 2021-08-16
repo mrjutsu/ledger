@@ -8,7 +8,7 @@ class ModelObserver
 {
     protected function logAction(Model $model, string $action)
     {
-        $model->loggable()->create([
+        $model->ledgerLogs()->create([
             'action' => $action,
             'user_id' => auth()->id()
         ]);
