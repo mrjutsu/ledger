@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.3
+
+- Adds a `details` column to the `ledger_logs` table.
+- Adds support to all the remaining Eloquent events.
+- Stores the deleted model as a string in the `details` field. The data is then transformed into an associative array when retrieving it from the database.
+
 ## v0.0.2
 
 - Adds the `ledger.php` configuration file.
