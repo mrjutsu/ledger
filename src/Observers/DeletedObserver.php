@@ -17,7 +17,9 @@ class DeletedObserver extends ModelObserver
      */
     public function deleted(Model $model)
     {
-        $this->logAction($model, self::DELETED_ACTION);
+        $details = $this->parseDetails($model);
+        
+        $this->logAction($model, self::DELETED_ACTION, $details);
     }
 
 }

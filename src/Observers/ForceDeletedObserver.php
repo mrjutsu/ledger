@@ -17,7 +17,9 @@ class ForceDeletedObserver extends ModelObserver
      */
     public function forceDeleted(Model $model)
     {
-        $this->logAction($model, self::FORCE_DELETED_ACTION);
+        $details = $this->parseDetails($model);
+
+        $this->logAction($model, self::FORCE_DELETED_ACTION, $details);
     }
 
 }
