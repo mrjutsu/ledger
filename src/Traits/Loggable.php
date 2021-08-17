@@ -4,9 +4,18 @@ namespace Mrjutsu\Ledger\Traits;
 
 use Mrjutsu\Ledger\Models\LedgerLog;
 
+use Mrjutsu\Ledger\Observers\RetrievedObserver;
+use Mrjutsu\Ledger\Observers\CreatingObserver;
 use Mrjutsu\Ledger\Observers\CreatedObserver;
+use Mrjutsu\Ledger\Observers\UpdatingObserver;
 use Mrjutsu\Ledger\Observers\UpdatedObserver;
+use Mrjutsu\Ledger\Observers\SavingObserver;
+use Mrjutsu\Ledger\Observers\SavedObserver;
+use Mrjutsu\Ledger\Observers\DeletingObserver;
 use Mrjutsu\Ledger\Observers\DeletedObserver;
+use Mrjutsu\Ledger\Observers\RestoringObserver;
+use Mrjutsu\Ledger\Observers\RestoredObserver;
+use Mrjutsu\Ledger\Observers\ReplicatingObserver;
 use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
@@ -19,9 +28,18 @@ trait Loggable {
     ];
 
     private static $eventsMap = [
+        'retrieved' => RetrievedObserver::class,
+        'creating' => CreatingObserver::class,
         'created' => CreatedObserver::class,
+        'updating' => UpdatingObserver::class,
         'updated' => UpdatedObserver::class,
+        'saving' => SavingObserver::class,
+        'saved' => SavedObserver::class,
+        'deleting' => DeletingObserver::class,
         'deleted' => DeletedObserver::class,
+        'restoring' => RestoringObserver::class,
+        'restored' => RestoredObserver::class,
+        'replicating' => ReplicatingObserver::class,
         'forceDeleted' => ForceDeletedObserver::class,
     ];
 
