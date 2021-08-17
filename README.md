@@ -26,7 +26,7 @@ After assets are published, run migrations.
 
 Using Ledger's basic features is very simple, just add the `Loggable` trait to the model you wish to log.
 
-```
+```php
 use Mrjutsu\Ledger\Traits\Loggable;
 
 class User extends Model {
@@ -42,12 +42,36 @@ By default, Ledger will log the following events:
 - `deleted`
 - `forceDeleted`
 
+### Logging Certain Events Only
+
+Logging only certain events is also very easy with Ledger.
+
+In your model, create a static property called `eventsLogged`, this will be
+an array that stores the names of the events you wish to log.
+
+```php
+use Mrjutsu\Ledger\Traits\Loggable;
+
+class User extends Model {
+    use Loggable;
+    
+    public static $eventsLogged = [
+        'created',
+        'saved',
+        'deleted'
+    ];
+}
+```
+
+### Available Events To Log
+
+Ledger logs all Eloquent events, if you wish to see a list of them as well as learning more about
+them, please visit the official [Laravel Documentation](https://laravel.com/docs/8.x/eloquent#events).
+
 ## Limitations
 
 Currently, Ledger is in its early stages and considerable shaping is necessary and will definitely come. Having said that, these are its current limitations:
 
-- Only basic CRUD actions are logged (`created`, `updated`, `deleted`, `forceDeleted`).
-- When a model is permanently deleted, currently there's no way to properly identify what was deleted.
 - Actions logged are very simple and currently there is no support for custom ones, like logging a download, for example.
 
 ## Roadmap
@@ -61,9 +85,7 @@ If you do wish to track the status of a given project head to the [Projects list
 If you wish to contribute to the project, follow these instructions:
 
 - Fork the project.
-- Give your branch a descriptive name, e.g.:
--   `feature/my-awesome-feature`
--   `bugfix/issue-fix`
--   `improvement/some-optimization`
+- Give your branch a descriptive name, e.g.: `feature/my-awesome-feature`, `bugfix/issue-fix` or `improvement/some-optimization`, for example.
+- Do your thing.
 - Pull `main` into your branch.
 - Make a Pull Request.
