@@ -13,6 +13,7 @@ class LedgerLog extends Model
      */
     protected $fillable = [
         'action',
+        'details',
         'user_id',
         'loggable_id',
         'loggable_type',
@@ -22,5 +23,10 @@ class LedgerLog extends Model
     public function loggable()
     {
         return $this->morphTo();
+    }
+    
+    public function getDetailsAttribute($value)
+    {
+        return json_decode($value, true) ?? $value;
     }
 }

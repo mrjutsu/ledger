@@ -16,6 +16,7 @@ class CreateLedgerLogsTable extends Migration
         Schema::create('ledger_logs', function (Blueprint $table) {
             $table->id();
             $table->string('action');
+            $table->text('details')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('loggable_id');
             $table->string('loggable_type');
