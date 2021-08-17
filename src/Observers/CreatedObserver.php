@@ -3,9 +3,6 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Routing\Pipeline;
-
-use function Composer\Autoload\includeFile;
 
 class CreatedObserver extends ModelObserver
 {
