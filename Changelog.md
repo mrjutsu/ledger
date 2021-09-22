@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.4
+
+- Adds `$fieldsLogged`, and with it, support to log changes made to specific fields.
+- Adds `$fieldsIgnored`, and with it, support to ignore changes made to specific fields.
+
 ## v0.0.3
 
 - Adds a `details` column to the `ledger_logs` table.
