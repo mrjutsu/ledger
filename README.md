@@ -63,6 +63,72 @@ class User extends Model {
 }
 ```
 
+### Logging Changes To Certain Fields
+
+Sometimes you might want to know when specific fields have changed besides just logging the actual change to the model.
+For these cases, you can use the `$fieldsLogged` property.
+
+```php
+use Mrjutsu\Ledger\Traits\Loggable;
+
+class User extends Model {
+    use Loggable;
+    
+    protected $fieldsLogged = [
+        'name',
+        'email',
+        'address'
+    ];
+}
+```
+
+In the above example, when the user gets `saved`, the event will be logged as it should, but additionally, changes made to
+those fields will be stored in a `fields` object, containing the changed fields as keys and a nested object containing the old and new values.
+
+By default, this will be an empty array.
+
+```php
+$user = User::find(1);
+// ['name' => 'John Doe', 'email' => 'email@example.com']
+
+$user->name = 'Foo Bar';
+$user->email = 'foo@bar.com';
+$user->role = 'client';
+$user->save();
+
+$log = $user->ledgerLogs()->first();
+$log->details;
+//[
+//    'fields' => [
+//        'name' => [
+//            'old' => 'John Doe',
+//            'new' => 'Foo Bar'
+//        ],
+//        'email' => [
+//            'old' => 'email@example.com',
+//            'new' => 'foo@bar.com'
+//        ],
+//    ]
+//]
+```
+
+In the above example, `role` is not logged because it was not declared in `$fieldsLogged`.
+
+If you wish to log changes made to all the fields, just add a `*` to the `$fieldsLogged` array,
+Ledger will see this and log changes made to all the model's fields, except those ignored.
+
+`$fieldsLogged = ['*']`
+
+Even if a field is logged, if no changes are made to it, it won't be logged.
+
+### Ignoring Certain Fields
+
+Similarly to how you can log certain fields, you can also ignore changes done to them.
+
+By default, Ledger will always ignore the model's primary key and its timestamp fields, if they're used.
+
+If you wish to ignore more fields, you can add them to the `$fieldsIgnored` property.
+
 ### Available Events To Log
 
 Ledger logs all Eloquent events, if you wish to see a list of them as well as learning more about

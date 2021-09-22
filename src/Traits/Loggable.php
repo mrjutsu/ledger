@@ -42,6 +42,10 @@ trait Loggable {
         'replicating' => ReplicatingObserver::class,
         'forceDeleted' => ForceDeletedObserver::class,
     ];
+    
+    protected $fieldsLogged = [];
+    
+    protected $fieldsIgnored = [];
 
     public static function bootLoggable()
     {
@@ -66,6 +70,24 @@ trait Loggable {
     public function user()
     {
         return $this->belongsTo(config('ledger.user'), config('ledger.user_primary_key'));
+    }
+
+    /*
+     * Returns all the logged fields for the given model
+     * */
+    public function getLoggedFields()
+    {
+        /*
+         * Ignore the primary key and the timestamps if used
+         * */
+        $this->fieldsIgnored = array_merge($this->fieldsIgnored, [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
+
+        $fields = $this->fieldsLogged;
+        if (in_array('*', $this->fieldsLogged)) {
+            $fields = array_keys($this->getAttributes());
+        }
+        
+        return array_diff($fields, $this->fieldsIgnored);
     }
 
 }
