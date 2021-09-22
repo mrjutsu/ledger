@@ -65,7 +65,7 @@ class User extends Model {
 
 ### Logging Changes To Certain Fields
 
-Sometimes you might want to know when specific fields have changed besides just logging the actual change to the model.
+Sometimes you might want to know what was changed to specific fields besides just knowing that the model was changed.
 For these cases, you can use the `$fieldsLogged` property.
 
 ```php
