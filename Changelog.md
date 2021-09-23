@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.0
+
+- Adds the possibility to override the default observers.
+
 ## v0.4.0
 
 - Adds the possibility to log custom actions.

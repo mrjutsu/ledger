@@ -164,17 +164,46 @@ class Message extends Model {
 Ledger logs all Eloquent events, if you wish to see a list of them as well as learning more about
 them, please visit the official [Laravel Documentation](https://laravel.com/docs/8.x/eloquent#events).
 
-## Limitations
+### Using Your Own Observers
 
-Currently, Ledger is in its early stages and considerable shaping is necessary and will definitely come. Having said that, these are its current limitations:
+Ledger allows you to extend from its main class `ModelObserver` should you wish to perform a custom action prior to an event being logged.
 
-- Actions logged are very simple and currently there is no support for custom ones, like logging a download, for example.
+In order to do so, you must first declare the observer action and its class, this is done in a variable called after
+the event, followed by Observer.
+
+In your model:
+
+```php
+use Mrjutsu\Ledger\Traits\Loggable;
+
+class User extends Model {
+    use Loggable;
+    
+    protected $createdObserver = MyCreatedObserver::class;
+}
+```
+
+Then, your observer should extend from `ModelObserver`.
+
+```php
+use Mrjutsu\Ledger\Observers\ModelObserver;
+use \Illuminate\Database\Eloquent\Model;
+
+class MyCreatedObserver extends ModelObserver {
+    public function created(Model $model)
+    {
+        // Your logic goes here
+        
+        $this->logAction($model, 'Your Action');
+    }
+}
+```
 
 ## Roadmap
 
 Ledger is a package I'm expanding and maintaining in my free time, so I won't be able to provide a specific time on when a new feature, fix or improvement will be released.
 
-If you do wish to track the status of a given project head to the [Projects list](https://github.com/mrjutsu/Ledger/projects), over there you will see what's currently cooking and how many tasks are left.
+If you do wish to track the status of a given project head to the [projects list](https://github.com/mrjutsu/Ledger/projects), over there you will see what's currently cooking and how many tasks are left.
 
 ## Contributing
 
