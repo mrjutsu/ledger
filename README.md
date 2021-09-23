@@ -129,6 +129,36 @@ By default, Ledger will always ignore the model's primary key and its timestamp 
 
 If you wish to ignore more fields, you can add them to the `$fieldsIgnored` property.
 
+### Custom Actions
+
+Ledger allows you to log when a custom action is performed in a very simple way. To do so, just call the `log()` method
+on the loggable model and pass the action to log, you can also pass details as either a string or an array.
+
+```php
+use Mrjutsu\Ledger\Traits\Loggable;
+
+class Message extends Model {
+    use Loggable;
+    
+    public function reply($filename)
+    {
+        $details = sprintf('User downloaded: %s', $filename);
+        
+        $this->log('Downloaded', $details);
+    }
+    
+    public function uploadFile($filename)
+    {
+        $details = [
+            'filename' => $filename,
+            'foo' => 'bar'
+        ];
+        
+        $this->log('Uploaded', $details);
+    }
+}
+```
+
 ### Available Events To Log
 
 Ledger logs all Eloquent events, if you wish to see a list of them as well as learning more about

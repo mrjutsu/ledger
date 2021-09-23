@@ -90,4 +90,23 @@ trait Loggable {
         return array_diff($fields, $this->fieldsIgnored);
     }
 
+    /**
+     * Logs a custom action for the given model.
+     *
+     * @param string $action
+     * @param null $details
+     */
+    public function log(string $action, $details = null)
+    {
+        if (is_array($details)) {
+            $details = json_encode($details);
+        }
+        
+        $this->ledgerLogs()->create([
+            'action' => $action,
+            'details' => $details,
+            'user_id' => auth()->id()
+        ]);
+    }
+
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0
+
+- Adds the possibility to log custom actions.
+
 ## v0.3.0
 
 - Adds `$fieldsLogged`, and with it, support to log changes made to specific fields.
