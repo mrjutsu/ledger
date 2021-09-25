@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RestoredObserver extends ModelObserver
 {
-    private const RESTORED_ACTION = 'Restored';
-
     /**
      * Handle the Model "restored" event.
      *

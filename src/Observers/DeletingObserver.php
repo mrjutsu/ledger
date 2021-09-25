@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeletingObserver extends ModelObserver
 {
-    private const DELETING_ACTION = 'Deleting';
-
     /**
      * Handle the Model "deleting" event.
      *

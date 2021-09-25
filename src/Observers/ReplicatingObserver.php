@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReplicatingObserver extends ModelObserver
 {
-    private const REPLICATING_ACTION = 'Replicating';
-
     /**
      * Handle the Model "replicating" event.
      *

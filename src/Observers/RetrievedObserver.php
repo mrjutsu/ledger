@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RetrievedObserver extends ModelObserver
 {
-    private const RETRIEVED_ACTION = 'Retrieved';
-
     /**
      * Handle the Model "retrieved" event.
      *

@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RestoringObserver extends ModelObserver
 {
-    private const RESTORING_ACTION = 'Restoring';
-
     /**
      * Handle the Model "restoring" event.
      *

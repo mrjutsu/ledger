@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ModelObserver
 {
-    protected const CREATED_ACTION = 'Created';
+    const CREATED_ACTION = 'Created';
+    const CREATING_ACTION = 'Creating';
+    const DELETED_ACTION = 'Deleted';
+    const DELETING_ACTION = 'Deleting';
+    const FORCE_DELETED_ACTION = 'Force Deleted';
+    const REPLICATING_ACTION = 'Replicating';
+    const RESTORED_ACTION = 'Restored';
+    const RESTORING_ACTION = 'Restoring';
+    const RETRIEVED_ACTION = 'Retrieved';
+    const SAVED_ACTION = 'Saved';
+    const SAVING_ACTION = 'Saving';
+    const UPDATED_ACTION = 'Updated';
+    const UPDATING_ACTION = 'Updating';
 
     protected function logAction(Model $model, string $action, string $details = null)
     {

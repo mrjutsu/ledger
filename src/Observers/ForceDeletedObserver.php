@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ForceDeletedObserver extends ModelObserver
 {
-
-    private const FORCE_DELETED_ACTION = 'Force Deleted';
-
     /**
      * Handle the Model "forceDeleted" event.
      *

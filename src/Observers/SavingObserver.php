@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SavingObserver extends ModelObserver
 {
-    private const SAVING_ACTION = 'Saving';
-
     /**
      * Handle the Model "saving" event.
      *

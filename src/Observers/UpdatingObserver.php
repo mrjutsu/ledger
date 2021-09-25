@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UpdatingObserver extends ModelObserver
 {
-    private const UPDATING_ACTION = 'Updating';
-
     /**
      * Handle the Model "updating" event.
      *
