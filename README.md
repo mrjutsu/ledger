@@ -55,7 +55,7 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class User extends Model {
     use Loggable;
     
-    public static $eventsLogged = [
+    protected static $eventsLogged = [
         'created',
         'saved',
         'deleted'
@@ -168,8 +168,8 @@ them, please visit the official [Laravel Documentation](https://laravel.com/docs
 
 Ledger allows you to extend from its main class `ModelObserver` should you wish to perform a custom action prior to an event being logged.
 
-In order to do so, you must first declare the observer action and its class, this is done in a variable called after
-the event, followed by Observer.
+In order to do so, you must first declare the observer action and its class, this is done in a static array called `$observers`,
+in it, you will specify the event as the key and your observer as the value.
 
 In your model:
 
@@ -179,7 +179,9 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class User extends Model {
     use Loggable;
     
-    protected $createdObserver = MyCreatedObserver::class;
+    protected static $observers = [
+        'created' => MyCreatedObserver::class,
+    ];
 }
 ```
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.1
+
+- Corrects the used observers assignment and the way they can be overridden.
+
 ## v0.5.0
 
 - Adds the possibility to override the default observers.

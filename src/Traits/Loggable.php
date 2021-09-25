@@ -20,51 +20,41 @@ use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
 
-    public static $eventsLogged = [
+    protected static $eventsLogged = [
         'created',
         'updated',
         'deleted',
         'forceDeleted'
     ];
-    
-    protected $retrievedObserver = RetrievedObserver::class;
-    protected $creatingObserver = CreatingObserver::class;
-    protected $createdObserver = CreatedObserver::class;
-    protected $updatingObserver = UpdatingObserver::class;
-    protected $updatedObserver = UpdatedObserver::class;
-    protected $savingObserver = SavingObserver::class;
-    protected $savedObserver = SavedObserver::class;
-    protected $deletingObserver = DeletingObserver::class;
-    protected $deletedObserver = DeletedObserver::class;
-    protected $restoringObserver = RestoringObserver::class;
-    protected $restoredObserver = RestoredObserver::class;
-    protected $replicatingObserver = ReplicatingObserver::class;
-    protected $forceDeletedObserver = ForceDeletedObserver::class;
+
+    private $ledgerObservers = [
+        'retrieved' => RetrievedObserver::class,
+        'creating' => CreatingObserver::class,
+        'created' => CreatedObserver::class,
+        'updating' => UpdatingObserver::class,
+        'updated' => UpdatedObserver::class,
+        'saving' => SavingObserver::class,
+        'saved' => SavedObserver::class,
+        'deleting' => DeletingObserver::class,
+        'deleted' => DeletedObserver::class,
+        'restoring' => RestoringObserver::class,
+        'restored' => RestoredObserver::class,
+        'replicating' => ReplicatingObserver::class,
+        'forceDeleted' => ForceDeletedObserver::class,
+    ];
+
+    protected static $observers = [];
     
     protected $fieldsLogged = [];
     protected $fieldsIgnored = [];
 
     public static function bootLoggable()
     {
-        $eventsMap = [
-            'retrieved' => static::$retrievedObserver,
-            'creating' => static::$creatingObserver,
-            'created' => static::$createdObserver,
-            'updating' => static::$updatingObserver,
-            'updated' => static::$updatedObserver,
-            'saving' => static::$savingObserver,
-            'saved' => static::$savedObserver,
-            'deleting' => static::$deletingObserver,
-            'deleted' => static::$deletedObserver,
-            'restoring' => static::$restoringObserver,
-            'restored' => static::$restoredObserver,
-            'replicating' => static::$replicatingObserver,
-            'forceDeleted' => static::$forceDeletedObserver,
-        ];
+        $observers = array_merge(self::$ledgerObservers, static::$observers);
         
         static::observe(
-            array_map(function($event) use ($eventsMap) {
-                return $eventsMap[$event];
+            array_map(function($event) use ($observers) {
+                return $observers[$event];
             }, self::$eventsLogged)
         );
     }
