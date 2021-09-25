@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CreatedObserver extends ModelObserver
 {
 
-    private const CREATED_ACTION = 'Created';
-
     /**
      * Handle the Model "created" event.
      *
