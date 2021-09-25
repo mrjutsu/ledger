@@ -27,7 +27,7 @@ trait Loggable {
         'forceDeleted'
     ];
 
-    private $ledgerObservers = [
+    protected static $ledgerObservers = [
         'retrieved' => RetrievedObserver::class,
         'creating' => CreatingObserver::class,
         'created' => CreatedObserver::class,

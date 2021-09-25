@@ -1,5 +1,9 @@
 # Changelog
 
+## v.0.5.2
+
+- Corrects the property type for `$ledgerObservers`.
+
 ## v0.5.1
 
 - Corrects the used observers assignment and the way they can be overridden.
