@@ -20,9 +20,7 @@ class CreatedObserver extends ModelObserver
         $user = config('ledger.user');
 
         if ($model instanceof $user) {
-            if (config('ledger.log_user_creation')) {
-                $this->logAction($model, config('ledger.new_user_action'));
-            }
+            $this->maybeLogUserRegistration($model);
         } else {
             $this->logAction($model, self::CREATED_ACTION);
         }

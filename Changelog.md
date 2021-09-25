@@ -1,6 +1,10 @@
 # Changelog
 
-## v.0.5.2
+## v0.5.3
+
+- Improves logic when creating a new User and validates whether the action should be logged as Created or a new registration.
+
+## v0.5.2
 
 - Corrects the property type for `$ledgerObservers`.
 
