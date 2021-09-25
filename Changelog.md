@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.4
+
+- Corrects the `maybeLogUserRegistration` method.
+- Moves the event constants from their observers and into the `ModelObserver`.
+
 ## v0.5.3
 
 - Improves logic when creating a new User and validates whether the action should be logged as Created or a new registration.
