@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Models\LedgerLog;
 
 class ModelObserver
 {
@@ -38,6 +39,22 @@ class ModelObserver
     {
         if (config('ledger.log_user_creation')) {
             $this->logAction($model, auth()->check() ? self::CREATED_ACTION : config('ledger.new_user_action'));
+        }
+    }
+
+    /**
+     * Force deleting a model fires the delete event and then the forceDeleted one, this method ensures we don't
+     * have duplicated Deleted actions logged unnecessarily. This will be done only if there isn't already
+     * a logged deleted action.
+     *
+     */
+    protected function deleteForceDeletePriorAction(Model $model)
+    {
+        $deletedLogsQuery = $model->ledgerLogs()->where(LedgerLog::ACTION, self::DELETED_ACTION);
+        $deletedLogsCount = (clone $deletedLogsQuery)->count();
+
+        if ($deletedLogsCount > 1) {
+            $deletedLogsQuery->orderBy('id', 'DESC')->first()->delete();
         }
     }
 }
