@@ -15,8 +15,10 @@ class ForceDeletedObserver extends ModelObserver
     public function forceDeleted(Model $model)
     {
         $details = $this->parseDetails($model);
-        
-        $this->deleteForceDeletePriorAction($model);
+
+        if (config('ledger.delete_force_delete_prior_action')) {
+            $this->deleteForceDeletePriorAction($model);
+        }
 
         $this->logAction($model, self::FORCE_DELETED_ACTION, $details);
     }

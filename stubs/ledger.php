@@ -34,4 +34,16 @@ return [
      * 
      * */
     'new_user_action' => 'Registered',
+    
+    /*
+     * Deleting Force Delete Prior Deleted Action
+     * 
+     * When force deleting a model, a Deleted event will be logged prior to the actual Force Deleted one, this option
+     * allows you to specify if you wish that prior action to be removed in order to prevent confusion by having
+     * duplicated Deleted actions. This will be done only if there is one prior action logged. For example, if
+     * you previously soft deleted a model and then restored it, that Deleted action will be kept, but the
+     * Deleted action logged immediately before the Force Deleted one will be removed.
+     * 
+     * */
+    'delete_force_delete_prior_action' => true,
 ];

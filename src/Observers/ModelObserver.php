@@ -43,9 +43,8 @@ class ModelObserver
     }
 
     /**
-     * Force deleting a model fires the delete event and then the forceDeleted one, this method ensures we don't
-     * have duplicated Deleted actions logged unnecessarily. This will be done only if there isn't already
-     * a logged deleted action.
+     * Deletes a model's Deleted action prior to the force deleted one. This is done only if there isn't another logged
+     * Deleted action.
      *
      */
     protected function deleteForceDeletePriorAction(Model $model)

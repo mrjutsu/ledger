@@ -3,6 +3,8 @@
 ## v0.5.5
 
 - Changes the string fields in `LedgerLog` to constants.
+- Adds a method to delete the prior logged Deleted action when a force delete happens.
+- Adds a configuration option to specify if the developer wants to remove the Deleted action prior to the Force Deleted one.
 
 ## v0.5.4
 
