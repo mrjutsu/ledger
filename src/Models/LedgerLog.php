@@ -6,17 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class LedgerLog extends Model
 {
+    const ACTION = 'action';
+    const DETAILS = 'details';
+    const USER_ID = 'user_id';
+    const LOGGABLE_ID = 'loggable_id';
+    const LOGGABLE_TYPE = 'loggable_type';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'action',
-        'details',
-        'user_id',
-        'loggable_id',
-        'loggable_type',
+        self::ACTION,
+        self::DETAILS,
+        self::USER_ID,
+        self::LOGGABLE_ID,
+        self::LOGGABLE_TYPE,
     ];
 
 
