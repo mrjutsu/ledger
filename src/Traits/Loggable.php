@@ -67,14 +67,6 @@ trait Loggable {
         return $this->morphMany(LedgerLog::class, 'loggable');
     }
 
-    /**
-    * Registers a relationship with the user responsible for the action performed
-    */
-    public function user()
-    {
-        return $this->belongsTo(config('ledger.user'), config('ledger.user_primary_key'));
-    }
-
     /*
      * Returns all the logged fields for the given model
      * */

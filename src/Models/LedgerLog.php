@@ -35,4 +35,12 @@ class LedgerLog extends Model
     {
         return json_decode($value, true) ?? $value;
     }
+
+    /**
+     * Registers a relationship with the user responsible for the action performed
+     */
+    public function user()
+    {
+        return $this->belongsTo(config('ledger.user'), config('ledger.user_primary_key'));
+    }
 }
