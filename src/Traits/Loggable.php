@@ -20,7 +20,7 @@ use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
 
-    protected static $eventsLogged = [
+    private $defaultEvents = [
         'created',
         'updated',
         'deleted',
@@ -43,19 +43,15 @@ trait Loggable {
         'forceDeleted' => ForceDeletedObserver::class,
     ];
 
-    protected static $observers = [];
-    
-    protected $fieldsLogged = [];
-    protected $fieldsIgnored = [];
-
     public static function bootLoggable()
     {
-        $observers = array_merge(self::$ledgerObservers, static::$observers);
+        $observers = array_merge(self::$ledgerObservers, static::$observers ?? []);
+        $events = static::$eventsLogged ?: self::$defaultEvents;
         
         static::observe(
             array_map(function($event) use ($observers) {
                 return $observers[$event];
-            }, self::$eventsLogged)
+            }, $events)
         );
     }
 
@@ -75,9 +71,9 @@ trait Loggable {
         /*
          * Ignore the primary key and the timestamps if used
          * */
-        $this->fieldsIgnored = array_merge($this->fieldsIgnored, [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
+        $this->fieldsIgnored = array_merge($this->fieldsIgnored ?? [], [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
 
-        $fields = $this->fieldsLogged;
+        $fields = $this->fieldsLogged ?? [];
         if (in_array('*', $this->fieldsLogged)) {
             $fields = array_keys($this->getAttributes());
         }

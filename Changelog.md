@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.6
+
+- Moves the `user` relationship from the `Loggable` trait to the `LedgerLog` model.
+- Fixes an issue with the properties declared in the `Loggable` trait and the ones used in the models.
+
 ## v0.5.5
 
 - Changes the string fields in `LedgerLog` to constants.
