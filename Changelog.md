@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.5
+
+- Changes the string fields in `LedgerLog` to constants.
+
 ## v0.5.4
 
 - Corrects the `maybeLogUserRegistration` method.
