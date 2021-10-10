@@ -29,11 +29,22 @@ class ModelObserver
         ]);
     }
     
+    /**
+     * Returns an encoded string containing the model's data. This is used mainly when deleting a model to keep a record
+     * of what was deleted when otherwise the data might be lost forever.
+     *
+     * @param Model $model
+     * @return string|false
+    */
     protected function parseDetails(Model $model)
     {
         return json_encode($model->toArray());
     }
 
+    /**
+     * Checks if the log_user_creation option is enabled. If so, logs the newly created user as a Registered action.
+     *
+    */
     protected function maybeLogUserRegistration(Model $model)
     {
         if (config('ledger.log_user_creation')) {
