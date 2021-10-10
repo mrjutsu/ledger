@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.9
+
+- Fixes a call to the `$fields` variable inside `getLoggedFields()`.
+
 ## v0.5.8
 
 - Changes all model properties to constants.

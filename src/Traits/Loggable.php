@@ -73,7 +73,7 @@ trait Loggable {
         $this->fieldsIgnored = array_merge(defined('static::FIELDS_IGNORED') ? static::FIELDS_IGNORED : [], [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
 
         $fields = defined('static::FIELDS_LOGGED') ? static::FIELDS_LOGGED : [];
-        if (in_array('*', $this->fields)) {
+        if (in_array('*', $fields)) {
             $fields = array_keys($this->getAttributes());
         }
         
