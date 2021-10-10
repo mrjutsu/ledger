@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.8
+
+- Changes all model properties to constants.
+- Updates the README to reflect the changes.
+
 ## v0.5.7
 
 - Removes `retrieved` observer.

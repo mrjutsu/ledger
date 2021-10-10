@@ -46,7 +46,7 @@ By default, Ledger will log the following events:
 
 Logging only certain events is also very easy with Ledger.
 
-In your model, create a static property called `eventsLogged`, this will be
+In your model, create a constant called `EVENTS_LOGGED`, this will be
 an array that stores the names of the events you wish to log.
 
 ```php
@@ -55,7 +55,7 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class User extends Model {
     use Loggable;
     
-    protected static $eventsLogged = [
+    const EVENTS_LOGGED = [
         'created',
         'saved',
         'deleted'
@@ -66,7 +66,7 @@ class User extends Model {
 ### Logging Changes To Certain Fields
 
 Sometimes you might want to know what was changed to specific fields besides just knowing that the model was changed.
-For these cases, you can use the `$fieldsLogged` property.
+For these cases, you can use the `FIELDS_LOGGED` constant.
 
 ```php
 use Mrjutsu\Ledger\Traits\Loggable;
@@ -74,7 +74,7 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class User extends Model {
     use Loggable;
     
-    protected $fieldsLogged = [
+    const FIELDS_LOGGED = [
         'name',
         'email',
         'address'
@@ -112,12 +112,12 @@ $log->details;
 //]
 ```
 
-In the above example, `role` is not logged because it was not declared in `$fieldsLogged`.
+In the above example, `role` is not logged because it was not declared in `FIELDS_LOGGED`.
 
-If you wish to log changes made to all the fields, just add a `*` to the `$fieldsLogged` array,
+If you wish to log changes made to all the fields, just add a `*` to the `FIELDS_LOGGED` array,
 Ledger will see this and log changes made to all the model's fields, except those ignored.
 
-`$fieldsLogged = ['*']`
+`const FIELDS_LOGGED = ['*']`
 
 Even if a field is logged, if no changes are made to it, it won't be logged.
 
@@ -127,7 +127,7 @@ Similarly to how you can log certain fields, you can also ignore changes done to
 
 By default, Ledger will always ignore the model's primary key and its timestamp fields, if they're used.
 
-If you wish to ignore more fields, you can add them to the `$fieldsIgnored` property.
+If you wish to ignore more fields, you can add them to the `FIELDS_IGNORED` constant.
 
 ### Custom Actions
 
@@ -140,7 +140,7 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class Message extends Model {
     use Loggable;
     
-    public function reply($filename)
+    public function downloadFile($filename)
     {
         $details = sprintf('User downloaded: %s', $filename);
         
@@ -168,7 +168,7 @@ them, please visit the official [Laravel Documentation](https://laravel.com/docs
 
 Ledger allows you to extend from its main class `ModelObserver` should you wish to perform a custom action prior to an event being logged.
 
-In order to do so, you must first declare the observer action and its class, this is done in a static array called `$observers`,
+In order to do so, you must first declare the observer action and its class, this is done in a constant array called `OBSERVERS`,
 in it, you will specify the event as the key and your observer as the value.
 
 In your model:
@@ -179,7 +179,7 @@ use Mrjutsu\Ledger\Traits\Loggable;
 class User extends Model {
     use Loggable;
     
-    protected static $observers = [
+    const OBSERVERS = [
         'created' => MyCreatedObserver::class,
     ];
 }

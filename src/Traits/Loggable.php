@@ -27,7 +27,7 @@ trait Loggable {
         'forceDeleted'
     ];
 
-    protected static $ledgerObservers = [
+    private static $ledgerObservers = [
         'creating' => CreatingObserver::class,
         'created' => CreatedObserver::class,
         'updating' => UpdatingObserver::class,
@@ -44,8 +44,8 @@ trait Loggable {
 
     public static function bootLoggable()
     {
-        $observers = array_merge(self::$ledgerObservers, static::OBSERVERS ?? []);
-        $events = static::EVENTS_LOGGED ?: self::$defaultEvents;
+        $observers = array_merge(self::$ledgerObservers, defined('static::OBSERVERS') ? static::OBSERVERS : []);
+        $events = defined('static::EVENTS_LOGGED') ? static::EVENTS_LOGGED : self::$defaultEvents;
         
         static::observe(
             array_map(function($event) use ($observers) {
@@ -70,10 +70,10 @@ trait Loggable {
         /*
          * Ignore the primary key and the timestamps if used
          * */
-        $this->fieldsIgnored = array_merge($this->fieldsIgnored ?? [], [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
+        $this->fieldsIgnored = array_merge(defined('static::FIELDS_IGNORED') ? static::FIELDS_IGNORED : [], [$this->primaryKey], $this->timestamps ? [static::CREATED_AT, static::UPDATED_AT] : []);
 
-        $fields = $this->fieldsLogged ?? [];
-        if (in_array('*', $this->fieldsLogged)) {
+        $fields = defined('static::FIELDS_LOGGED') ? static::FIELDS_LOGGED : [];
+        if (in_array('*', $this->fields)) {
             $fields = array_keys($this->getAttributes());
         }
         
