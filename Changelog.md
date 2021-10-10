@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.8.1
+
+- Improves the model replication check.
+
 ## v0.8.0
 
 - Moves field changes checking logic into an independent method.

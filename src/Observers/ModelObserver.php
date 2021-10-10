@@ -105,6 +105,11 @@ class ModelObserver
     protected function setModelAsReplicated(Model $model)
     {
         $model->ledger__replicated = true;
+
+        /**
+         * Guard the attribute so it can't be saved
+        */
+        $model->guarded[] = 'ledger__replicated';
     }
     
     /**
@@ -121,6 +126,7 @@ class ModelObserver
             $replicated = true;
             
             unset($model->ledger__replicated);
+            unset($model->guarded['ledger__replicated']);
         }
         
         return $replicated;
