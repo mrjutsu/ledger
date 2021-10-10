@@ -108,38 +108,4 @@ trait Loggable {
         ]);
     }
 
-    /**
-     * Marks the model as being replicated. This is later used in the SavedObserver to accurately log the performed
-     * action.
-     *
-     */
-    public function setAsReplicated()
-    {
-        $this->ledger__replicated = true;
-
-        /**
-         * Guard the attribute so it can't be saved
-         */
-        $this->guarded[] = 'ledger__replicated';
-    }
-
-    /**
-     * Checks if the model was replicated and removes the mark if so.
-     *
-     * @return boolean
-     */
-    public function checkIfReplicated()
-    {
-        $replicated = false;
-
-        if ($this->ledger__replicated) {
-            $replicated = true;
-
-            unset($this->ledger__replicated);
-            unset($this->guarded['ledger__replicated']);
-        }
-
-        return $replicated;
-    }
-
 }

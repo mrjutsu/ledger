@@ -14,6 +14,6 @@ class ReplicatingObserver extends ModelObserver
      */
     public function replicating(Model $model)
     {
-        $model->setAsReplicated();
+        $this->addMeta($model, self::REPLICATED_KEY, true);
     }
 }

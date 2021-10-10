@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.9.0
+
+- Adds the `LedgerMeta` model.
+- Adds methods for the `LedgerMeta` model in `ModelObserver`.
+- Saves and fetches metadata to verify if a model was replicated when saving.
+
 ## v0.8.3
 
 - Fixes the replicating helper methods.

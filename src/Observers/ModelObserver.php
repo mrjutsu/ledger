@@ -4,6 +4,7 @@ namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 use Mrjutsu\Ledger\Models\LedgerLog;
+use Mrjutsu\Ledger\Models\LedgerMeta;
 
 class ModelObserver
 {
@@ -19,6 +20,8 @@ class ModelObserver
     const SAVING_ACTION = 'Saving';
     const UPDATED_ACTION = 'Updated';
     const UPDATING_ACTION = 'Updating';
+    
+    const REPLICATED_KEY = 'Replicated';
 
     protected function logAction(Model $model, string $action, string $details = null)
     {
@@ -27,6 +30,66 @@ class ModelObserver
             'details' => $details,
             'user_id' => auth()->id()
         ]);
+    }
+    
+    /**
+     * Adds a meta for the given model with the given key and value.
+     * 
+     * @param Model $model
+     * @param string $key
+     * @param string $value
+     */
+    protected function addMeta(Model $model, string $key, string $value)
+    {
+        $model->ledgerMeta()->create([
+            LedgerMeta::META_KEY => $key,
+            LedgerMeta::META_VALUE => $value
+        ]);
+    }
+    
+    /**
+     * Returns the first found LedgerMeta record for the given model with the given key.
+     * 
+     * @param Model $model
+     * @param string $key
+     * @return Model|null
+     */
+    protected function getMeta(Model $model, string $key)
+    {
+        return $model->ledgerMeta()->where(LedgerMeta::META_KEY, $key)->first();
+    }
+
+    /**
+     * Returns the value of the LedgerMeta record found for the given model with the given key.
+     *
+     * @param Model $model
+     * @param string $key
+     * @return mixed|null
+     */
+    protected function getMetaValue(Model $model, string $key)
+    {
+        $meta = $this->getMeta($model, $key);
+
+        if ($meta) {
+            return $meta->meta_value;
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Deletes the first LedgerMeta record found for the given model with the given key.
+     * 
+     * @param Model $model
+     * @param string $key
+     */
+    protected function removeMeta(Model $model, string $key)
+    {
+        $meta = $this->getMeta($model, $key);
+
+        if ($meta) {
+            $meta->delete();
+        }
     }
     
     /**

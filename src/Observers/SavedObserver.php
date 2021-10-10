@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Models\LedgerMeta;
 
 class SavedObserver extends ModelObserver
 {
@@ -16,8 +17,10 @@ class SavedObserver extends ModelObserver
     {
         $details = $this->maybeGetChangedFields($model);
         
-        $replicated = $model->checkIfReplicated();
+        $replicated = filter_var($this->getMetaValue($model, LedgerMeta::META_KEY), FILTER_VALIDATE_BOOLEAN);
 
         $this->logAction($model, $replicated ? self::REPLICATED_ACTION : self::SAVED_ACTION, $details);
+        
+        $this->removeMeta($model, LedgerMeta::META_KEY);
     }
 }
