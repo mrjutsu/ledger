@@ -1,31 +1,31 @@
 # Changelog
 
-## v0.5.10
+## v0.8.0
 
 - Moves field changes checking logic into an independent method.
 - Add comments to the methods in `ModelObserver`.
 - Adjusts the `SavedObserver` to accurately log when a model was replicated.
 
-## v0.5.9
+## v0.7.2
 
 - Fixes a call to the `$fields` variable inside `getLoggedFields()`.
 
-## v0.5.8
+## v0.7.1
 
 - Changes all model properties to constants.
 - Updates the README to reflect the changes.
 
-## v0.5.7
+## v0.7.0
 
 - Removes `retrieved` observer.
 - Changes the declared observers and logged events from static properties to model constants.
 
-## v0.5.6
+## v0.6.1
 
 - Moves the `user` relationship from the `Loggable` trait to the `LedgerLog` model.
 - Fixes an issue with the properties declared in the `Loggable` trait and the ones used in the models.
 
-## v0.5.5
+## v0.6.0
 
 - Changes the string fields in `LedgerLog` to constants.
 - Adds a method to delete the prior logged Deleted action when a force delete happens.
