@@ -28,7 +28,6 @@ trait Loggable {
     ];
 
     protected static $ledgerObservers = [
-        'retrieved' => RetrievedObserver::class,
         'creating' => CreatingObserver::class,
         'created' => CreatedObserver::class,
         'updating' => UpdatingObserver::class,
@@ -45,8 +44,8 @@ trait Loggable {
 
     public static function bootLoggable()
     {
-        $observers = array_merge(self::$ledgerObservers, static::$observers ?? []);
-        $events = static::$eventsLogged ?: self::$defaultEvents;
+        $observers = array_merge(self::$ledgerObservers, static::OBSERVERS ?? []);
+        $events = static::EVENTS_LOGGED ?: self::$defaultEvents;
         
         static::observe(
             array_map(function($event) use ($observers) {

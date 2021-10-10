@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.7
+
+- Removes `retrieved` observer.
+- Changes the declared observers and logged events from static properties to model constants.
+
 ## v0.5.6
 
 - Moves the `user` relationship from the `Loggable` trait to the `LedgerLog` model.

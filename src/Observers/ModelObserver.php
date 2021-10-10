@@ -15,7 +15,6 @@ class ModelObserver
     const REPLICATING_ACTION = 'Replicating';
     const RESTORED_ACTION = 'Restored';
     const RESTORING_ACTION = 'Restoring';
-    const RETRIEVED_ACTION = 'Retrieved';
     const SAVED_ACTION = 'Saved';
     const SAVING_ACTION = 'Saving';
     const UPDATED_ACTION = 'Updated';
