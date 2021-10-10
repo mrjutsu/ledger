@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Traits;
 
 use Mrjutsu\Ledger\Models\LedgerLog;
+use Mrjutsu\Ledger\Models\LedgerMeta;
 
 use Mrjutsu\Ledger\Observers\RetrievedObserver;
 use Mrjutsu\Ledger\Observers\CreatingObserver;
@@ -60,6 +61,14 @@ trait Loggable {
     public function ledgerLogs()
     {
         return $this->morphMany(LedgerLog::class, 'loggable');
+    }
+
+    /**
+     * Registers a polymorphic relationship between the model and LedgerMeta
+     */
+    public function ledgerMeta()
+    {
+        return $this->morphMany(LedgerMeta::class, 'ledger_meta');
     }
 
     /*
