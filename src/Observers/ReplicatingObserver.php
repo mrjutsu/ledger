@@ -14,6 +14,6 @@ class ReplicatingObserver extends ModelObserver
      */
     public function replicating(Model $model)
     {
-        $this->logAction($model, self::REPLICATING_ACTION);
+        $this->setModelAsReplicated($model);
     }
 }

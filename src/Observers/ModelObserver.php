@@ -12,7 +12,7 @@ class ModelObserver
     const DELETED_ACTION = 'Deleted';
     const DELETING_ACTION = 'Deleting';
     const FORCE_DELETED_ACTION = 'Force Deleted';
-    const REPLICATING_ACTION = 'Replicating';
+    const REPLICATED_ACTION = 'Replicated';
     const RESTORED_ACTION = 'Restored';
     const RESTORING_ACTION = 'Restoring';
     const SAVED_ACTION = 'Saved';
@@ -95,5 +95,34 @@ class ModelObserver
         }
 
         return $details;
+    }
+    
+    /**
+     * Marks the model as being replicated. This is later used in the SavedObserver to accurately log the performed
+     * action.
+     * 
+    */
+    protected function setModelAsReplicated(Model $model)
+    {
+        $model->ledger__replicated = true;
+    }
+    
+    /**
+     * Checks if the model was replicated and removes the mark if so.
+     * 
+     * @param Model $model
+     * @return boolean
+    */
+    protected function checkIfModelWasReplicated(Model $model)
+    {
+        $replicated = false;
+
+        if ($model->ledger__replicated) {
+            $replicated = true;
+            
+            unset($model->ledger__replicated);
+        }
+        
+        return $replicated;
     }
 }

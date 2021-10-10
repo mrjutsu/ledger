@@ -15,7 +15,9 @@ class SavedObserver extends ModelObserver
     public function saved(Model $model)
     {
         $details = $this->maybeGetChangedFields($model);
+        
+        $replicated = $this->checkIfModelWasReplicated;
 
-        $this->logAction($model, self::SAVED_ACTION, $details);
+        $this->logAction($model, $replicated ? self::REPLICATED_ACTION : self::SAVED_ACTION, $details);
     }
 }

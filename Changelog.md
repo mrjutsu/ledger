@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.10
+
+- Moves field changes checking logic into an independent method.
+- Add comments to the methods in `ModelObserver`.
+- Adjusts the `SavedObserver` to accurately log when a model was replicated.
+
 ## v0.5.9
 
 - Fixes a call to the `$fields` variable inside `getLoggedFields()`.
