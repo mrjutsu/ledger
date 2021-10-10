@@ -45,6 +45,7 @@ class ModelObserver
      * Deletes a model's Deleted action prior to the force deleted one. This is done only if there isn't another logged
      * Deleted action.
      *
+     * @param Model $model
      */
     protected function deleteForceDeletePriorAction(Model $model)
     {
@@ -54,5 +55,34 @@ class ModelObserver
         if ($deletedLogsCount > 1) {
             $deletedLogsQuery->orderBy('id', 'DESC')->first()->delete();
         }
+    }
+
+    /**
+     * Checks if any of the logged fields have been changed and returns a string containing the changes or null otherwise.
+     *
+     * @param Model $model
+     * @return string|null
+     */
+    protected function maybeGetChangedFields(Model $model)
+    {
+        $loggedFields = $model->getLoggedFields();
+        $details = null;
+
+        if (!empty($loggedFields)) {
+            $changes = [
+                'fields' => []
+            ];
+            foreach ($model->getChanges() as $field => $value) {
+                if (in_array($field, $loggedFields) && $model->isDirty($field)) {
+                    $changes['fields'][$field] = [
+                        'old' => $model->getOriginal($field),
+                        'new' => $value
+                    ];
+                }
+            }
+            $details = json_encode($changes) ?: null;
+        }
+
+        return $details;
     }
 }
