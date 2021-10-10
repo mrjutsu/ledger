@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class LedgerMeta extends Model
 {
+    protected $table = 'ledger_meta';
+    
     const META_KEY = 'meta_key';
     const META_VALUE = 'meta_value';
     const LEDGER_META_ID = 'ledger_meta_id';

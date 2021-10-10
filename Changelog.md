@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.9.1
+
+- Fixes the `LedgerMeta` table assignment.
+
 ## v0.9.0
 
 - Adds the `LedgerMeta` model.
