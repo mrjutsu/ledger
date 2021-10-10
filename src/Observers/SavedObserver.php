@@ -16,7 +16,7 @@ class SavedObserver extends ModelObserver
     {
         $details = $this->maybeGetChangedFields($model);
         
-        $replicated = $model->checkIfWasReplicated;
+        $replicated = $model->checkIfReplicated();
 
         $this->logAction($model, $replicated ? self::REPLICATED_ACTION : self::SAVED_ACTION, $details);
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.8.3
+
+- Fixes the replicating helper methods.
+
 ## v0.8.2
 
 - Moves the replicating methods to the `Loggable` trait so they're available to the models.

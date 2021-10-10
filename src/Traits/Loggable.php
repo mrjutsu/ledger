@@ -104,7 +104,7 @@ trait Loggable {
      * action.
      *
      */
-    protected function setAsReplicated()
+    public function setAsReplicated()
     {
         $this->ledger__replicated = true;
 
@@ -119,7 +119,7 @@ trait Loggable {
      *
      * @return boolean
      */
-    protected function checkIfWasReplicated()
+    public function checkIfReplicated()
     {
         $replicated = false;
 
