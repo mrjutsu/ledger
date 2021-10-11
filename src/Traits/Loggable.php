@@ -17,7 +17,7 @@ use Mrjutsu\Ledger\Observers\ForceDeletedObserver;
 
 trait Loggable {
 
-    private $defaultEvents = [
+    private static $defaultEvents = [
         'created',
         'updated',
         'deleted',
@@ -58,7 +58,7 @@ trait Loggable {
 
     /*
      * Returns all the logged fields for the given model
-     * */
+     */
     public function getLoggedFields()
     {
         /*
@@ -93,6 +93,9 @@ trait Loggable {
         ]);
     }
 
+    /**
+     * Overrides the parent's replicate method in order to properly log the Replicating action.
+     */
     public function replicate()
     {
         /**

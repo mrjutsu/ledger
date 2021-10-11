@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.11.1
+
+- Updates doc blocks.
+
 ## v0.11.0
 
 - Removes unused observers.

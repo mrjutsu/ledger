@@ -17,7 +17,14 @@ class ModelObserver
     const RESTORING_ACTION = 'Restoring';
     const SAVED_ACTION = 'Saved';
     const UPDATED_ACTION = 'Updated';
-    
+
+    /**
+     * Logs an action for the given model.
+     *
+     * @param Model $model
+     * @param string $action
+     * @param string|null $details
+     */
     protected function logAction(Model $model, string $action, string $details = null)
     {
         $model->ledgerLogs()->create([
@@ -33,7 +40,7 @@ class ModelObserver
      *
      * @param Model $model
      * @return string|false
-    */
+     */
     protected function parseDetails(Model $model)
     {
         return json_encode($model->toArray());
@@ -42,7 +49,7 @@ class ModelObserver
     /**
      * Checks if the log_user_creation option is enabled. If so, logs the newly created user as a Registered action.
      *
-    */
+     */
     protected function maybeLogUserRegistration(Model $model)
     {
         if (config('ledger.log_user_creation')) {
