@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.11.0
+
+- Removes unused observers.
+
 ## v0.10.0
 
 - Removes the `LedgerMeta` model and migration.

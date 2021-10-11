@@ -9,7 +9,6 @@ use Mrjutsu\Ledger\Models\LedgerMeta;
 class ModelObserver
 {
     const CREATED_ACTION = 'Created';
-    const CREATING_ACTION = 'Creating';
     const DELETED_ACTION = 'Deleted';
     const DELETING_ACTION = 'Deleting';
     const FORCE_DELETED_ACTION = 'Force Deleted';
@@ -17,12 +16,8 @@ class ModelObserver
     const RESTORED_ACTION = 'Restored';
     const RESTORING_ACTION = 'Restoring';
     const SAVED_ACTION = 'Saved';
-    const SAVING_ACTION = 'Saving';
     const UPDATED_ACTION = 'Updated';
-    const UPDATING_ACTION = 'Updating';
     
-    const REPLICATED_KEY = 'Replicated';
-
     protected function logAction(Model $model, string $action, string $details = null)
     {
         $model->ledgerLogs()->create([
