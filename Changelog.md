@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.10.0
+
+- Removes the `LedgerMeta` model and migration.
+- Overrides the `replicate` method in order to properly log when they model is being replicated.
+
 ## v0.9.1
 
 - Fixes the `LedgerMeta` table assignment.

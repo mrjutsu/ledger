@@ -3,7 +3,7 @@
 namespace Mrjutsu\Ledger\Traits;
 
 use Mrjutsu\Ledger\Models\LedgerLog;
-use Mrjutsu\Ledger\Models\LedgerMeta;
+use Mrjutsu\Ledger\Observers\ModelObserver;
 
 use Mrjutsu\Ledger\Observers\RetrievedObserver;
 use Mrjutsu\Ledger\Observers\CreatingObserver;
@@ -39,7 +39,6 @@ trait Loggable {
         'deleted' => DeletedObserver::class,
         'restoring' => RestoringObserver::class,
         'restored' => RestoredObserver::class,
-        'replicating' => ReplicatingObserver::class,
         'forceDeleted' => ForceDeletedObserver::class,
     ];
 
@@ -61,14 +60,6 @@ trait Loggable {
     public function ledgerLogs()
     {
         return $this->morphMany(LedgerLog::class, 'loggable');
-    }
-
-    /**
-     * Registers a polymorphic relationship between the model and LedgerMeta
-     */
-    public function ledgerMeta()
-    {
-        return $this->morphMany(LedgerMeta::class, 'ledger_meta');
     }
 
     /*
@@ -106,6 +97,16 @@ trait Loggable {
             'details' => $details,
             'user_id' => auth()->id()
         ]);
+    }
+
+    public function replicate()
+    {
+        /**
+         * Log the current model as being currently replicated before the parent's method creates a new instance
+         */
+        $this->log(ModelObserver::REPLICATING_ACTION);
+
+        parent::replicate();
     }
 
 }
