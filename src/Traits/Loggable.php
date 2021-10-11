@@ -86,11 +86,15 @@ trait Loggable {
             $details = json_encode($details);
         }
         
-        $this->ledgerLogs()->create([
-            'action' => $action,
-            'details' => $details,
-            'user_id' => auth()->id()
-        ]);
+        $this->ledgerLogs()->create(
+            array_merge(
+                [
+                    LedgerLog::ACTION => $action,
+                    LedgerLog::DETAILS => $details,
+                    $this->ledgerDefaults()
+                ]
+            )
+        );
     }
 
     /**
@@ -104,6 +108,15 @@ trait Loggable {
         $this->log(ModelObserver::REPLICATING_ACTION);
 
         parent::replicate();
+    }
+    
+    public function ledgerDefaults()
+    {
+        return [
+            LedgerLog::USER_ID => auth()->id(),
+            LedgerLog::IP => request()->ip(),
+            LedgerLog::USER_AGENT => request()->userAgent()
+        ];
     }
 
 }

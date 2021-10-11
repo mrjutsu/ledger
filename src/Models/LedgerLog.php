@@ -11,6 +11,8 @@ class LedgerLog extends Model
     const USER_ID = 'user_id';
     const LOGGABLE_ID = 'loggable_id';
     const LOGGABLE_TYPE = 'loggable_type';
+    const IP = 'ip';
+    const USER_AGENT = 'user_agent';
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,8 @@ class LedgerLog extends Model
         self::USER_ID,
         self::LOGGABLE_ID,
         self::LOGGABLE_TYPE,
+        self::IP,
+        self::USER_AGENT,
     ];
 
 

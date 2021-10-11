@@ -27,11 +27,7 @@ class ModelObserver
      */
     protected function logAction(Model $model, string $action, string $details = null)
     {
-        $model->ledgerLogs()->create([
-            'action' => $action,
-            'details' => $details,
-            'user_id' => auth()->id()
-        ]);
+        $model->log($action, $details);
     }
     
     /**

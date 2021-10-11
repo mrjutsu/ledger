@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.12.0
+
+- Adds IP and User Agent to the logged data.
+- Simplifies the logging creation logic.
+
 ## v0.11.1
 
 - Updates doc blocks.
