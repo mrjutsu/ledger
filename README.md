@@ -161,8 +161,17 @@ class Message extends Model {
 
 ### Available Events To Log
 
-Ledger logs all Eloquent events, if you wish to see a list of them as well as learning more about
-them, please visit the official [Laravel Documentation](https://laravel.com/docs/8.x/eloquent#events).
+Ledger logs the following model events:
+
+- `created`.
+- `updating`.
+- `updated`.
+- `saved`.
+- `deleting`.
+- `deleted`.
+- `restoring`.
+- `restored`.
+- `forceDeleted`.
 
 ### Using Your Own Observers
 
