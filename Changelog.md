@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.12.1
+
+- Fixes an issue with the overriden `replicate` method.
+
 ## v0.12.0
 
 - Adds IP and User Agent to the logged data.

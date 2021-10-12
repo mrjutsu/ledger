@@ -99,8 +99,10 @@ trait Loggable {
 
     /**
      * Overrides the parent's replicate method in order to properly log the Replicating action.
+     * 
+     * @param array|null $except
      */
-    public function replicate()
+    public function replicate(array $except = null)
     {
         /**
          * Log the current model as being currently replicated before the parent's method creates a new instance
