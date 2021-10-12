@@ -17,6 +17,7 @@ class ModelObserver
     const RESTORING_ACTION = 'Restoring';
     const SAVED_ACTION = 'Saved';
     const UPDATED_ACTION = 'Updated';
+    const REGISTERED_ACTION = 'Registered';
 
     /**
      * Logs an action for the given model.
