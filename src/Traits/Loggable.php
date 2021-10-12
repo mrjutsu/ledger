@@ -91,8 +91,7 @@ trait Loggable {
                 [
                     LedgerLog::ACTION => $action,
                     LedgerLog::DETAILS => $details,
-                    $this->ledgerDefaults()
-                ]
+                ], $this->ledgerDefaults()
             )
         );
     }

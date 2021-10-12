@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.12.2
+
+- Fixes how the array used to log data is built.
+
 ## v0.12.1
 
 - Fixes an issue with the overriden `replicate` method.
