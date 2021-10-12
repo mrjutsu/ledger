@@ -111,6 +111,9 @@ trait Loggable {
         parent::replicate();
     }
     
+    /**
+     * Return an array containing the default values that will always be logged.
+     */
     public function ledgerDefaults()
     {
         return [
