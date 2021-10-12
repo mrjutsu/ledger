@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.12.3
+
+- Changes the `new_user_action` value in the `ledger` config file to use a constant.
+- Removes the unused `Ledger` class.
+- Updates the README.
+- Removes the `InstallCommand`.
+- Adds comments.
+
 ## v0.12.2
 
 - Fixes how the array used to log data is built.
