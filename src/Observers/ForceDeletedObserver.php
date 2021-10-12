@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ForceDeletedObserver extends ModelObserver
 {
-
-    private const FORCE_DELETED_ACTION = 'Force Deleted';
-
     /**
      * Handle the Model "forceDeleted" event.
      *
@@ -17,7 +14,13 @@ class ForceDeletedObserver extends ModelObserver
      */
     public function forceDeleted(Model $model)
     {
-        $this->logAction($model, self::FORCE_DELETED_ACTION);
+        $details = $this->parseDetails($model);
+
+        if (config('ledger.delete_force_delete_prior_action')) {
+            $this->deleteForceDeletePriorAction($model);
+        }
+
+        $this->logAction($model, self::FORCE_DELETED_ACTION, $details);
     }
 
 }

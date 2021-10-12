@@ -3,7 +3,6 @@
 namespace Mrjutsu\Ledger;
 
 use Illuminate\Support\ServiceProvider;
-use Mrjutsu\Ledger\Console\InstallCommand;
 
 class LedgerServiceProvider extends ServiceProvider
 {
@@ -24,22 +23,13 @@ class LedgerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->configurePublishing();
+        $this->publishes([
+            __DIR__.'/../stubs/ledger.php' => config_path('ledger.php'),
+        ], 'ledger-config');
+        
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'ledger-migrations');
     }
-
-    /**
-     * Configure the publishable resources offered by the package.
-     *
-     * @return void
-     */
-    protected function configurePublishing()
-    {
-        if ($this->app->runningInConsole()) {
-
-            $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
-            ]);
-
-        }
-    }
+    
 }

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class DeletedObserver extends ModelObserver
 {
 
-    private const DELETED_ACTION = 'Deleted';
-
     /**
      * Handle the Model "deleted" event.
      *
@@ -17,7 +15,9 @@ class DeletedObserver extends ModelObserver
      */
     public function deleted(Model $model)
     {
-        $this->logAction($model, self::DELETED_ACTION);
+        $details = $this->parseDetails($model);
+        
+        $this->logAction($model, self::DELETED_ACTION, $details);
     }
 
 }

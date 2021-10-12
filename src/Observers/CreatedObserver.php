@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CreatedObserver extends ModelObserver
 {
 
-    private const CREATED_ACTION = 'Created';
-
     /**
      * Handle the Model "created" event.
      *
@@ -17,7 +15,13 @@ class CreatedObserver extends ModelObserver
      */
     public function created(Model $model)
     {
-        $this->logAction($model, self::CREATED_ACTION);
+        $user = config('ledger.user');
+
+        if ($model instanceof $user) {
+            $this->maybeLogUserRegistration($model);
+        } else {
+            $this->logAction($model, self::CREATED_ACTION);
+        }
     }
 
 }
