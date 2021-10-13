@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.12.4
+
+- Adds the `LOG_REPLICATING_ACTION` constant to the `Loggable` trait as a means to allow developers to specify if they want to log the `Replicating` action for a model.
+- Updates the README.
+
 ## v0.12.3
 
 - Changes the `new_user_action` value in the `ledger` config file to use a constant.
