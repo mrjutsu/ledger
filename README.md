@@ -159,6 +159,31 @@ class Message extends Model {
 }
 ```
 
+### Replicating Models
+
+Replication is a different process because Laravel creates a new instance of the model before firing the `replicating` event,
+this prevents Ledger from successfully logging the action since at the time of the event being fired, the new instance doesn't
+have an `id` set.
+
+To mitigate this, Ledger overrides the `replicate` method and logs the `Replicating` action on the model being replicated
+prior to the new instance being created.
+
+This is enabled by default, but if you wish to replicate models and not log it, you can define the constant `LOG_REPLICATING_ACTION`
+in your model and set it to `false`, Ledger will honor this and the replicating action will not be logged.
+
+```php
+use Mrjutsu\Ledger\Traits\Loggable;
+
+class User extends Model {
+    use Loggable;
+    
+    /**
+     * This means when you call replicate() on the model, the action won't be logged.
+     */
+    const LOG_REPLICATING_ACTION = false;
+}
+```
+
 ### Available Events To Log
 
 Ledger logs the following model events:
