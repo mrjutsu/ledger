@@ -100,6 +100,7 @@ trait Loggable {
      * Overrides the parent's replicate method in order to properly log the Replicating action.
      * 
      * @param array|null $except
+     * @return static
      */
     public function replicate(array $except = null)
     {
@@ -115,7 +116,7 @@ trait Loggable {
             $this->log(ModelObserver::REPLICATING_ACTION);
         }
 
-        parent::replicate();
+        return parent::replicate();
     }
     
     /**
