@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 
 class DeletingObserver extends ModelObserver
 {
@@ -14,6 +15,6 @@ class DeletingObserver extends ModelObserver
      */
     public function deleting(Model $model)
     {
-        $this->logAction($model, self::DELETING_ACTION);
+        $this->logAction($model, Ledger::DELETING_ACTION);
     }
 }

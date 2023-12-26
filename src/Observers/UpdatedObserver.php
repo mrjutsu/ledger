@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 
 class UpdatedObserver extends ModelObserver
 {
@@ -14,7 +15,7 @@ class UpdatedObserver extends ModelObserver
      */
     public function updated(Model $model)
     {
-        $this->logAction($model, self::UPDATED_ACTION);
+        $this->logAction($model, Ledger::UPDATED_ACTION);
     }
 
 }

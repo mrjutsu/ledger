@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 
 class RestoredObserver extends ModelObserver
 {
@@ -14,6 +15,6 @@ class RestoredObserver extends ModelObserver
      */
     public function restored(Model $model)
     {
-        $this->logAction($model, self::RESTORED_ACTION);
+        $this->logAction($model, Ledger::RESTORED_ACTION);
     }
 }

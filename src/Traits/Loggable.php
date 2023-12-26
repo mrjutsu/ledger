@@ -2,8 +2,8 @@
 
 namespace Mrjutsu\Ledger\Traits;
 
+use Mrjutsu\Ledger\Ledger;
 use Mrjutsu\Ledger\Models\LedgerLog;
-use Mrjutsu\Ledger\Observers\ModelObserver;
 
 use Mrjutsu\Ledger\Observers\CreatedObserver;
 use Mrjutsu\Ledger\Observers\UpdatingObserver;
@@ -113,7 +113,7 @@ trait Loggable {
             /**
              * Log the current model as being currently replicated before the parent's method creates a new instance
              */
-            $this->log(ModelObserver::REPLICATING_ACTION);
+            $this->log(Ledger::REPLICATING_ACTION);
         }
 
         return parent::replicate();

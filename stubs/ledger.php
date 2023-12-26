@@ -33,7 +33,7 @@ return [
      * When a User registers, Ledger will set the action as the value specified here.
      * 
      * */
-    'new_user_action' => \Mrjutsu\Ledger\Observers\ModelObserver::REGISTERED_ACTION,
+    'new_user_action' => \Mrjutsu\Ledger\Ledger::REGISTERED_ACTION,
     
     /*
      * Deleting Force Delete Prior Deleted Action

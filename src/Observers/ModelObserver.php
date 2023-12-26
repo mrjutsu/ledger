@@ -3,21 +3,12 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 use Mrjutsu\Ledger\Models\LedgerLog;
 use Mrjutsu\Ledger\Models\LedgerMeta;
 
 class ModelObserver
 {
-    const CREATED_ACTION = 'Created';
-    const DELETED_ACTION = 'Deleted';
-    const DELETING_ACTION = 'Deleting';
-    const FORCE_DELETED_ACTION = 'Force Deleted';
-    const REPLICATING_ACTION = 'Replicating';
-    const RESTORED_ACTION = 'Restored';
-    const RESTORING_ACTION = 'Restoring';
-    const SAVED_ACTION = 'Saved';
-    const UPDATED_ACTION = 'Updated';
-    const REGISTERED_ACTION = 'Registered';
 
     /**
      * Logs an action for the given model.
@@ -50,7 +41,7 @@ class ModelObserver
     protected function maybeLogUserRegistration(Model $model)
     {
         if (config('ledger.log_user_creation')) {
-            $this->logAction($model, auth()->check() ? self::CREATED_ACTION : config('ledger.new_user_action'));
+            $this->logAction($model, auth()->check() ? Ledger::CREATED_ACTION : config('ledger.new_user_action'));
         }
     }
 
@@ -62,7 +53,7 @@ class ModelObserver
      */
     protected function deleteForceDeletePriorAction(Model $model)
     {
-        $deletedLogsQuery = $model->ledgerLogs()->where(LedgerLog::ACTION, self::DELETED_ACTION);
+        $deletedLogsQuery = $model->ledgerLogs()->where(LedgerLog::ACTION, Ledger::DELETED_ACTION);
         $deletedLogsCount = (clone $deletedLogsQuery)->count();
 
         if ($deletedLogsCount > 1) {

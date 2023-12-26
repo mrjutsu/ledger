@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 
 class ForceDeletedObserver extends ModelObserver
 {
@@ -20,7 +21,7 @@ class ForceDeletedObserver extends ModelObserver
             $this->deleteForceDeletePriorAction($model);
         }
 
-        $this->logAction($model, self::FORCE_DELETED_ACTION, $details);
+        $this->logAction($model, Ledger::FORCE_DELETED_ACTION, $details);
     }
 
 }

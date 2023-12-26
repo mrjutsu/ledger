@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 use Mrjutsu\Ledger\Models\LedgerMeta;
 
 class SavedObserver extends ModelObserver
@@ -17,6 +18,6 @@ class SavedObserver extends ModelObserver
     {
         $details = $this->maybeGetChangedFields($model);
         
-        $this->logAction($model, self::SAVED_ACTION, $details);
+        $this->logAction($model, Ledger::SAVED_ACTION, $details);
     }
 }

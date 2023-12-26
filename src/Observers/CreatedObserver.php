@@ -3,6 +3,7 @@
 namespace Mrjutsu\Ledger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
+use Mrjutsu\Ledger\Ledger;
 
 class CreatedObserver extends ModelObserver
 {
@@ -20,7 +21,7 @@ class CreatedObserver extends ModelObserver
         if ($model instanceof $user) {
             $this->maybeLogUserRegistration($model);
         } else {
-            $this->logAction($model, self::CREATED_ACTION);
+            $this->logAction($model, Ledger::CREATED_ACTION);
         }
     }
 
