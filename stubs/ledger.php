@@ -46,4 +46,11 @@ return [
      * 
      * */
     'delete_force_delete_prior_action' => true,
+
+    /*
+     * Determines whether authentication events should be logged.
+     *
+     * If enabled, authentication events still need to be registered in your EventServiceProvider.
+     * */
+    'log_authentication_events' => true,
 ];
