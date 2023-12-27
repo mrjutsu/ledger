@@ -3,7 +3,7 @@
     "description": "A Laravel package that allows you to log everything",
     "type": "library",
     "require": {
-        "laravel/framework": "^8",
+        "laravel/framework": "^10.10",
         "php": "^7.1"
     },
     "license": "MIT",
