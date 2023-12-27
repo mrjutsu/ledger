@@ -2,7 +2,9 @@
 
 namespace Mrjutsu\Ledger;
 
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
+use Mrjutsu\Ledger\Listeners\LogFailed;
 use Mrjutsu\Ledger\Listeners\LogLogin;
 
 class Ledger
@@ -17,9 +19,15 @@ class Ledger
     const SAVED_ACTION = 'Saved';
     const UPDATED_ACTION = 'Updated';
     const REGISTERED_ACTION = 'Registered';
+
+    /*
+     * Authentication
+     * */
     const LOGGEDIN_ACTION = 'Logged In';
+    const FAILED_ACTION = 'Log In Failed';
 
     const LOGIN_LISTENER = LogLogin::class;
+    const FAILED_LISTENER = LogFailed::class;
 
     const ALL_EVENTS = [
         Login::class => [
@@ -29,10 +37,12 @@ class Ledger
 
     private const LISTENER_MAP = [
         'Login' => self::LOGIN_LISTENER,
+        'Failed' => self::FAILED_LISTENER,
     ];
 
     private const EVENT_MAP = [
         'Login' => Login::class,
+        'Failed' => Failed::class,
     ];
 
     /**
@@ -47,7 +57,11 @@ class Ledger
      */
     public static function logAuthenticationEvents(array $events = ['*']): array
     {
-        if ($events === ['*'] || empty($events)) {
+        if (! config('ledger.log_authentication_events', true)) {
+            return [];
+        }
+
+        if ($events === ['*']) {
             return self::ALL_EVENTS;
         } else {
             $actions = [];
@@ -58,10 +72,6 @@ class Ledger
                         self::LISTENER_MAP[$event]
                     ];
                 }
-            }
-
-            if (empty($actions)) {
-                return self::ALL_EVENTS;
             }
 
             return $actions;
