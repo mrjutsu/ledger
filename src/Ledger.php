@@ -6,11 +6,13 @@ use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Verified;
 use Mrjutsu\Ledger\Listeners\LogAuthenticated;
 use Mrjutsu\Ledger\Listeners\LogFailed;
 use Mrjutsu\Ledger\Listeners\LogLogin;
 use Mrjutsu\Ledger\Listeners\LogLogout;
+use Mrjutsu\Ledger\Listeners\LogPasswordReset;
 use Mrjutsu\Ledger\Listeners\LogVerified;
 
 class Ledger
@@ -34,12 +36,14 @@ class Ledger
     const LOGOUT_ACTION = 'Logged Out';
     const AUTHENTICATED_ACTION = 'Authenticated';
     const VERIFIED_ACTION = 'Verified Email';
+    const PASSWORD_RESET_ACTION = 'Reset Password';
 
     const LOGIN_LISTENER = LogLogin::class;
     const FAILED_LISTENER = LogFailed::class;
     const LOGOUT_LISTENER = LogLogout::class;
     const AUTHENTICATED_LISTENER = LogAuthenticated::class;
     const VERIFIED_LISTENER = LogVerified::class;
+    const PASSWORD_RESET_LISTENER = LogPasswordReset::class;
 
     const ALL_EVENTS = [
         Login::class => [
@@ -57,6 +61,9 @@ class Ledger
         Verified::class => [
             self::VERIFIED_LISTENER,
         ],
+        PasswordReset::class => [
+            self::PASSWORD_RESET_LISTENER,
+        ],
     ];
 
     private const LISTENER_MAP = [
@@ -65,6 +72,7 @@ class Ledger
         'Logout' => self::LOGOUT_LISTENER,
         'Authenticated' => self::AUTHENTICATED_LISTENER,
         'Verified' => self::VERIFIED_LISTENER,
+        'PasswordReset' => self::PASSWORD_RESET_LISTENER,
     ];
 
     private const EVENT_MAP = [
