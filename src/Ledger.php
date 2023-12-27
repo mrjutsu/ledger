@@ -2,9 +2,11 @@
 
 namespace Mrjutsu\Ledger;
 
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use Mrjutsu\Ledger\Listeners\LogAuthenticated;
 use Mrjutsu\Ledger\Listeners\LogFailed;
 use Mrjutsu\Ledger\Listeners\LogLogin;
 use Mrjutsu\Ledger\Listeners\LogLogout;
@@ -28,10 +30,12 @@ class Ledger
     const LOGGEDIN_ACTION = 'Logged In';
     const FAILED_ACTION = 'Log In Failed';
     const LOGOUT_ACTION = 'Logged Out';
+    const AUTHENTICATED_ACTION = 'Authenticated';
 
     const LOGIN_LISTENER = LogLogin::class;
     const FAILED_LISTENER = LogFailed::class;
     const LOGOUT_LISTENER = LogLogout::class;
+    const AUTHENTICATED_LISTENER = LogAuthenticated::class;
 
     const ALL_EVENTS = [
         Login::class => [
@@ -43,18 +47,23 @@ class Ledger
         Logout::class => [
             self::LOGOUT_LISTENER,
         ],
+        Authenticated::class => [
+            self::AUTHENTICATED_LISTENER,
+        ],
     ];
 
     private const LISTENER_MAP = [
         'Login' => self::LOGIN_LISTENER,
         'Failed' => self::FAILED_LISTENER,
         'Logout' => self::LOGOUT_LISTENER,
+        'Authenticated' => self::AUTHENTICATED_LISTENER,
     ];
 
     private const EVENT_MAP = [
         'Login' => Login::class,
         'Failed' => Failed::class,
         'Logout' => Logout::class,
+        'Authenticated' => Authenticated::class,
     ];
 
     /**
