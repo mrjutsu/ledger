@@ -6,10 +6,12 @@ use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\Verified;
 use Mrjutsu\Ledger\Listeners\LogAuthenticated;
 use Mrjutsu\Ledger\Listeners\LogFailed;
 use Mrjutsu\Ledger\Listeners\LogLogin;
 use Mrjutsu\Ledger\Listeners\LogLogout;
+use Mrjutsu\Ledger\Listeners\LogVerified;
 
 class Ledger
 {
@@ -31,11 +33,13 @@ class Ledger
     const FAILED_ACTION = 'Log In Failed';
     const LOGOUT_ACTION = 'Logged Out';
     const AUTHENTICATED_ACTION = 'Authenticated';
+    const VERIFIED_ACTION = 'Verified Email';
 
     const LOGIN_LISTENER = LogLogin::class;
     const FAILED_LISTENER = LogFailed::class;
     const LOGOUT_LISTENER = LogLogout::class;
     const AUTHENTICATED_LISTENER = LogAuthenticated::class;
+    const VERIFIED_LISTENER = LogVerified::class;
 
     const ALL_EVENTS = [
         Login::class => [
@@ -50,6 +54,9 @@ class Ledger
         Authenticated::class => [
             self::AUTHENTICATED_LISTENER,
         ],
+        Verified::class => [
+            self::VERIFIED_LISTENER,
+        ],
     ];
 
     private const LISTENER_MAP = [
@@ -57,6 +64,7 @@ class Ledger
         'Failed' => self::FAILED_LISTENER,
         'Logout' => self::LOGOUT_LISTENER,
         'Authenticated' => self::AUTHENTICATED_LISTENER,
+        'Verified' => self::VERIFIED_LISTENER,
     ];
 
     private const EVENT_MAP = [
@@ -64,6 +72,7 @@ class Ledger
         'Failed' => Failed::class,
         'Logout' => Logout::class,
         'Authenticated' => Authenticated::class,
+        'Verified' => Verified::class,
     ];
 
     /**
